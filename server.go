@@ -16,21 +16,16 @@ func banner(){
 }
 
 func main() {
-	//opcodes
-//	ack :=[]byte{0,4,0,0}
-//	var frame[]byte
-//	opack :=[]byte{6,0}
 	//print my banner
 	banner()
 
-	// Create a UDP socket listening on *:9001
-	// * meaning all IP addresses on the machine
+	// socket is listening on port 69
 	conn, err := net.ListenPacket("udp", ":69")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// forever in Go
+	// Since this is a listener the program must runner forever
 	for {
 		data := make([]byte, 512)
 		// blocking call, ReadFrom conn, store result in data
@@ -52,16 +47,16 @@ func main() {
 			data_send :=[]byte{0,3,0,1}
 			fmt.Printf("Read Request: \n")
 			//lets read the file
-			readFile, err := ioutil.ReadFile(string(data[2:size-10]))
+			readFile, err := ioutil.ReadFile("files/"+string(data[2:size-10]))
 			
 			if err != nil {
-	    		fmt.Println("error file not foudn")
-	    		//fmt.Printf(string(data[:size-9]))
+	    		fmt.Println("error file not Found")
 			}
 			sFile := string(readFile)
 			//prints out an error if there is nothing 
 			//sending files
 			runes:= []rune(sFile)
+			//This part seperates the bytes into 512 chunks and sends them to the client
 			for i := 0; i < len(runes); i++ {
 				if (i%513 !=0 || i==0){
 				data_send = append(data_send, byte(runes[i]))
@@ -93,6 +88,7 @@ func main() {
 		case 2:
 			//---------------------WRQ---------------------------
 			//this is where we will keeo the recieved data
+			lsize :=size
 			frame :=[]byte{0,4,0,0}
 			data_rcv:= make([]byte, 512)
 			var file_data []byte
@@ -105,7 +101,6 @@ func main() {
 				log.Print("Error: " + err.Error())
 			}
 			//increase counter
-			//blk_count++
 			//no we start reading
 				for{
 					size1, addr, err := conn.ReadFrom(data_rcv)
@@ -130,18 +125,15 @@ func main() {
 			//now lets put tha file
 			//print it
 			fmt.Println("\nSaving....\n")
-			//fmt.Println(string(file_data))
-			f, err := os.Create("IncomingData.txt")
+			fmt.Printf(string(data[2:lsize-10]) + "\nSaved in:\n files/\n")
+			f, err := os.Create("files/"+string(data[2:lsize-10]))
 			if err != nil{
 				log.Print("Error: " + err.Error())
 				}
 			defer f.Close()
-			//fmt.Println(f)
-			f.WriteString(string(file_data))
-			
+			f.WriteString(string(file_data))	
 		default:
 			fmt.Printf("File Completely sent")
-			break
 		}
 	}
 }
