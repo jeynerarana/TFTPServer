@@ -13,5 +13,5 @@ get a banner about the server. You can leave the tab open and go to another tab 
 3. Connect to the TFTP server with the Linux TFTP client. Navigate to the other tab or terminal windows where you are running your client and
 connect to your server using `connect <yourserverIP>`, the terminal should look like so : `tftp> connect 192.168.0.15`
 4. Use `get <filename>` or `put <filename>` to send and recieve data
-### Note: When you send a file to the server it will be saved in `files/` directory where the program is running. So please make sure that the `files/` is present when you run the server.
+### Note: When you send a file to the server it will be saved in `files/` directory where the program is running. So please make sure that the `files/` is present when you run the server. I provided a files in the `files/` named `file.txt` this can be used to test the `get` command with your TFTP Client
 
