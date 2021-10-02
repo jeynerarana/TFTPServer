@@ -1,5 +1,6 @@
 # TFTPServer
-This is a FTP server side program that is meant to work with build in FTP client in your system
+This is a TFTP server side program that is meant to work with build in FTP client in your system
+**Request For Comments: 1350** 
 ## Ubuntu
 So far the application only work with my Linux machine and may not work work in another OS, the 
 program was only tested on the Linux System
