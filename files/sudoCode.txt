@@ -1,0 +1,36 @@
+//start
+//let's start by taking plaintext to ascii
+	Char array p_a(string plaintext){
+	for each charater in the string
+		turn that character to ascii
+		add the result string to a string called assci_trans
+}
+//we can do the same thing for ascii to plaintect
+	char array a_p(string ascii){
+	for each character in the string(ascii)
+		turn rhar character to string
+		add the result to the string names plaintext_trans
+}
+//lets make a fn that send the data
+	int send_data(char *block){
+	TODO
+	}
+/s make a function that recieves the data
+	int recv_data(char *block){
+	}
+//main class
+	set a default blocksize (512)
+	set an array of bytes initialized with blocksize
+	open a file
+	while the file doesn reach eof
+		count =0;
+		if ( count mod 512 != 0){
+			add each character to the array[blocksize]
+		}
+		call the function ascci/plaintect to..
+		send/recv data;
+		erase the contents in the array
+		
+		count ++;
+		
+//end
